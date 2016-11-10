@@ -1,9 +1,13 @@
-debaters = [
+participants = [
   {'name': 'xtina', 'role': 'debate'},
   {'name': 'shannon', 'role': 'debate'},
   {'name': 'grant', 'role': 'debate'},
   {'name': 'august', 'role': 'judge'},
   {'name': 'sam', 'role': 'debate'},
+  {'name': 'rebecca', 'role': 'debate'},
+  {'name': 'khurram', 'role': 'debate'},
+  {'name': 'sarah', 'role': 'debate'},
+  {'name': 'patrick', 'role': 'debate'},
   {'name': 'mom', 'role': 'judge'}
 ]
 
@@ -23,18 +27,10 @@ sortedRooms = {
     "Judge(s)": [],
     "OG": [],
     "OO": []
-  }
+  },
 }
 
 # loop through data and count and make an array of judges
-
-def judges_count(debaters):
-  judges = []
-  for debater in debaters:
-      if debater['role'] == 'judge':
-        judges.append(debater['name'])
-  assign_judge_room(judges)
-  print('Full list of Judges' + str(judges))
 
 def assign_judge_room(judges):
   if len(judges) >= len(rooms):
@@ -42,6 +38,42 @@ def assign_judge_room(judges):
     for judge in judges:
       sortedRooms[counter]["Judge(s)"].append(judge)
       counter += 1
-  print('Sorted Rooms' + str(sortedRooms))
+    ##need to loop back to the beginning of the rooms so judges are equally distributed
 
-judges_count(debaters)
+def judges_count(participants):
+  judges = []
+  for participant in participants:
+      if participant['role'] == 'judge':
+        judges.append(participant['name'])
+  assign_judge_room(judges)
+
+judges_count(participants)
+
+# loop through data and count and make an array of debaters
+
+def assign_debater_room(debaters):
+  if len(debaters) / len(rooms) == 4:
+    roomCounter = 0
+    positionCounter = 0
+    for debater in debaters:
+      if positionCounter <= 1:
+        sortedRooms[roomCounter]["OG"].append(debater)
+        positionCounter += 1
+      elif positionCounter == 2:
+        sortedRooms[roomCounter]["OO"].append(debater)
+        positionCounter += 1
+      else:
+        sortedRooms[roomCounter]["OO"].append(debater)
+        positionCounter = 0
+        if roomCounter < 1:
+          roomCounter += 1
+  print('Debater sorted Rooms' + str(sortedRooms))
+
+def debaters_count(participants):
+  debaters = []
+  for participant in participants:
+    if participant['role'] == 'debate':
+      debaters.append(participant['name'])
+  assign_debater_room(debaters)
+
+debaters_count(participants)
