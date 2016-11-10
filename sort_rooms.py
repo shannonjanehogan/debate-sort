@@ -1,3 +1,6 @@
+import pprint
+pp = pprint.PrettyPrinter(indent=1)
+
 participants = [
   {'name': 'xtina', 'role': 'debate'},
   {'name': 'shannon', 'role': 'debate'},
@@ -9,27 +12,54 @@ participants = [
   {'name': 'sarah', 'role': 'debate'},
   {'name': 'patrick', 'role': 'debate'},
   {'name': 'mom', 'role': 'judge'},
-  {'name': 'tanya', 'role': 'judge'}
+  {'name': 'tanya', 'role': 'judge'},
+  {'name': 'kaja', 'role': 'debate'},
+  {'name': 'vivian', 'role': 'debate'},
+  {'name': 'scottish david', 'role': 'debate'},
+  {'name': 'dena', 'role': 'debate'},
+  {'name': 'charlotte', 'role': 'debate'},
+  {'name': 'moira', 'role': 'debate'},
+  {'name': 'brian steele', 'role': 'debate'},
+  {'name': 'devon', 'role': 'debate'}
 ]
 
 rooms = ['BUCH B211', 'BUCH B219']
 
-#final version of data
+judges = []
+
+debaters = []
 
 sortedRooms = {
   0: {
     "RoomName": "BUCH B211",
     "Judge(s)": [],
     "OG": [],
-    "OO": []
+    "OO": [],
+    "CG": [],
+    "CO": []
   },
   1: {
     "RoomName": "BUCH B219",
     "Judge(s)": [],
     "OG": [],
-    "OO": []
+    "OO": [],
+    "CG": [],
+    "CO": []
   },
 }
+
+#Checklist
+#Done
+#more judges than rooms
+#equal judges to rooms
+#more debaters than spots (go through list, then add extra debaters to judges list)
+
+#Todo
+#less judges than rooms (later)
+#less debaters than rooms (later)
+#handle debate or judge
+#import data from csv
+#export data to csv
 
 def assign_judge_room(judges):
   if len(judges) >= len(rooms):
@@ -42,7 +72,6 @@ def assign_judge_room(judges):
         counter = 0
 
 def judges_count(participants):
-  judges = []
   for participant in participants:
       if participant['role'] == 'judge':
         judges.append(participant['name'])
@@ -50,28 +79,23 @@ def judges_count(participants):
 
 judges_count(participants)
 
-# loop through data and count and make an array of debaters
-
 def assign_debater_room(debaters):
-  if len(debaters) / len(rooms) == 4:
-    roomCounter = 0
-    positionCounter = 0
-    for debater in debaters:
-      if positionCounter <= 1:
-        sortedRooms[roomCounter]["OG"].append(debater)
-        positionCounter += 1
-      elif positionCounter == 2:
-        sortedRooms[roomCounter]["OO"].append(debater)
-        positionCounter += 1
-      else:
-        sortedRooms[roomCounter]["OO"].append(debater)
-        positionCounter = 0
-        if roomCounter < 1:
-          roomCounter += 1
-  print('Debater sorted Rooms' + str(sortedRooms))
+  roomCounter = 0
+  i = 0
+  positions = ["OG", "OO", "CG", "CO"]
+  for debater in debaters:
+    if roomCounter == len(list(sortedRooms.keys())):
+      judges.append(debater)
+      continue
+    sortedRooms[roomCounter][positions[i]].append(debater)
+    if len(sortedRooms[roomCounter][positions[i]]) == 2:
+      i += 1
+    if i == len(positions):
+      i = 0
+      roomCounter += 1
+  pp.pprint(sortedRooms)
 
 def debaters_count(participants):
-  debaters = []
   for participant in participants:
     if participant['role'] == 'debate':
       debaters.append(participant['name'])
