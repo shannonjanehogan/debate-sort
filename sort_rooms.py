@@ -8,7 +8,8 @@ participants = [
   {'name': 'khurram', 'role': 'debate'},
   {'name': 'sarah', 'role': 'debate'},
   {'name': 'patrick', 'role': 'debate'},
-  {'name': 'mom', 'role': 'judge'}
+  {'name': 'mom', 'role': 'judge'},
+  {'name': 'tanya', 'role': 'judge'}
 ]
 
 rooms = ['BUCH B211', 'BUCH B219']
@@ -30,15 +31,15 @@ sortedRooms = {
   },
 }
 
-# loop through data and count and make an array of judges
-
 def assign_judge_room(judges):
   if len(judges) >= len(rooms):
     counter = 0;
     for judge in judges:
       sortedRooms[counter]["Judge(s)"].append(judge)
-      counter += 1
-    ##need to loop back to the beginning of the rooms so judges are equally distributed
+      if counter < len(rooms) - 1:
+        counter += 1
+      else:
+        counter = 0
 
 def judges_count(participants):
   judges = []
