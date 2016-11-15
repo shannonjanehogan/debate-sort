@@ -20,7 +20,9 @@ participants = [
   {'name': 'charlotte', 'role': 'debate'},
   {'name': 'moira', 'role': 'debate'},
   {'name': 'brian steele', 'role': 'debate'},
-  {'name': 'devon', 'role': 'debate'}
+  {'name': 'devon', 'role': 'debate'},
+  {'name': 'zeynep', 'role': 'debate'},
+  {'name': 'allison', 'role': 'debate'}
 ]
 
 rooms = ['BUCH B211', 'BUCH B219']
@@ -46,20 +48,38 @@ sortedRooms = {
     "CG": [],
     "CO": []
   },
+  2: {
+    "RoomName": "BUCH B215",
+    "Judge(s)": [],
+    "OG": [],
+    "OO": [],
+    "CG": [],
+    "CO": []
+  },
 }
 
 #Checklist
+
 #Done
+#assign debaters to rooms
 #more judges than rooms
 #equal judges to rooms
 #more debaters than spots (go through list, then add extra debaters to judges list)
 
 #Todo
 #less judges than rooms (later)
-#less debaters than rooms (later)
+#odd number of debaters than rooms (later)
 #handle debate or judge
+#handle partner preference
 #import data from csv
 #export data to csv
+#need to think through how to do sorted rooms
+
+#stretch
+#store the data
+#match based on skill (aka do a nov room, pro room, or mixed rooms)
+#make simple web page and do forms yourself
+#text debaters their room & partner & other debaters
 
 def assign_judge_room(judges):
   if len(judges) >= len(rooms):
@@ -71,21 +91,35 @@ def assign_judge_room(judges):
       else:
         counter = 0
 
-def judges_count(participants):
-  for participant in participants:
-      if participant['role'] == 'judge':
-        judges.append(participant['name'])
-  assign_judge_room(judges)
+def enough_judges:
+  if len(judges) < len(list(sortedRooms.keys())):
+    false
+  else:
+    true
 
-judges_count(participants)
+def handle_extra_debaters(roomCounter):
+  i = 0
+  positions = ["OG", "OO"]
+  for debater in extra_debaters:
+    if len(debaters) >= 4 && enough_judges:
+      sortedRooms[roomCounter][positions[i]].append(debater)
+      if len(sortedRooms[roomCounter][positions[i]]) == 2:
+        i += 1
+      if i == len(positions):
+        judges.append(debater)
+    else:
+      judges.append(debater)
 
 def assign_debater_room(debaters):
   roomCounter = 0
   i = 0
   positions = ["OG", "OO", "CG", "CO"]
-  for debater in debaters:
-    if roomCounter == len(list(sortedRooms.keys())):
-      judges.append(debater)
+  extra_debaters = []
+  for debater in debaters: #for i in 0..len(debaters):
+    if roomCounter == len(list(sortedRooms.keys())): ###need to refactor this line
+      ## should trigger when there are less than 8 debaters left FROM an array that had extra debaters
+      extra_debaters.append(debater)
+      handle_extra_debaters(roomCounter)
       continue
     sortedRooms[roomCounter][positions[i]].append(debater)
     if len(sortedRooms[roomCounter][positions[i]]) == 2:
@@ -93,12 +127,30 @@ def assign_debater_room(debaters):
     if i == len(positions):
       i = 0
       roomCounter += 1
-  pp.pprint(sortedRooms)
 
 def debaters_count(participants):
   for participant in participants:
     if participant['role'] == 'debate':
       debaters.append(participant['name'])
-  assign_debater_room(debaters)
+
+def judges_count(participants):
+  for participant in participants:
+      if participant['role'] == 'judge':
+        judges.append(participant['name'])
+
+judges_count(participants)
 
 debaters_count(participants)
+
+assign_judge_room(judges)
+
+assign_debater_room(debaters)
+
+pp.pprint(sortedRooms)
+
+##odd numbers of debaters
+
+#between 4 - 7 extra debaters && there are enough judges
+  #make a room of 4 debaters and then assign the extra to judging
+#less than 4
+  #put them in the judges list
