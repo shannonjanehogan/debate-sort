@@ -65,10 +65,10 @@ sortedRooms = {
 #more judges than rooms
 #equal judges to rooms
 #more debaters than spots (go through list, then add extra debaters to judges list)
-
-#Todo
 #less judges than rooms (later)
 #odd number of debaters than rooms (later)
+
+#Todo
 #handle debate or judge
 #handle partner preference
 #import data from csv
@@ -91,42 +91,42 @@ def assign_judge_room(judges):
       else:
         counter = 0
 
-def enough_judges:
-  if len(judges) < len(list(sortedRooms.keys())):
-    false
-  else:
-    true
+def enough_judges():
+  return len(judges) < len(list(sortedRooms.keys()))
 
-def handle_extra_debaters(roomCounter):
+def judges_needed():
+  return len(list(sortedRooms.keys())) - len(judges)
+
+def handle_extra_debaters(roomCounter, extraDebaters):
   i = 0
   positions = ["OG", "OO"]
-  for debater in extra_debaters:
-    if len(debaters) >= 4 && enough_judges:
-      sortedRooms[roomCounter][positions[i]].append(debater)
-      if len(sortedRooms[roomCounter][positions[i]]) == 2:
-        i += 1
-      if i == len(positions):
-        judges.append(debater)
-    else:
-      judges.append(debater)
+  if len(extraDebaters) - judges_needed() >= 5:
+    for debater in extraDebaters:
+      if enough_judges:
+        sortedRooms[roomCounter][positions[i]].append(debater)
+        if len(sortedRooms[roomCounter][positions[i]]) == 2:
+          i += 1
+        if i == len(positions):
+          judges.append(debater)
+  else:
+    judges.extend(extraDebaters)
 
 def assign_debater_room(debaters):
   roomCounter = 0
   i = 0
   positions = ["OG", "OO", "CG", "CO"]
-  extra_debaters = []
-  for debater in debaters: #for i in 0..len(debaters):
-    if roomCounter == len(list(sortedRooms.keys())): ###need to refactor this line
-      ## should trigger when there are less than 8 debaters left FROM an array that had extra debaters
-      extra_debaters.append(debater)
-      handle_extra_debaters(roomCounter)
-      continue
+  splicePosition = len(debaters) - (len(debaters) % 8)
+  extraDebaters = debaters[splicePosition:]
+  slicedDebaters = debaters[:splicePosition]
+  for debater in slicedDebaters:
     sortedRooms[roomCounter][positions[i]].append(debater)
     if len(sortedRooms[roomCounter][positions[i]]) == 2:
       i += 1
     if i == len(positions):
       i = 0
       roomCounter += 1
+  if extraDebaters:
+    handle_extra_debaters(roomCounter, extraDebaters)
 
 def debaters_count(participants):
   for participant in participants:
@@ -142,15 +142,8 @@ judges_count(participants)
 
 debaters_count(participants)
 
-assign_judge_room(judges)
-
 assign_debater_room(debaters)
 
+assign_judge_room(judges)
+
 pp.pprint(sortedRooms)
-
-##odd numbers of debaters
-
-#between 4 - 7 extra debaters && there are enough judges
-  #make a room of 4 debaters and then assign the extra to judging
-#less than 4
-  #put them in the judges list
