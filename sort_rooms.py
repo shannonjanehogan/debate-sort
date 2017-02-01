@@ -104,8 +104,8 @@ def assign_judge_room(judges):
       else:
         counter = 0
 
-def enough_judges():
-  return len(judges) < len(list(sortedRooms.keys()))
+def enough_judges(sortedRooms):
+  return len(judges) >= rooms_used(sortedRooms)
 
 def judges_needed():
   return len(list(sortedRooms.keys())) - len(judges)
