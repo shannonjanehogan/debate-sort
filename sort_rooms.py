@@ -22,7 +22,10 @@ participants = [
   {'name': 'brian steele', 'role': 'debate'},
   {'name': 'devon', 'role': 'debate'},
   {'name': 'zeynep', 'role': 'debate'},
-  {'name': 'allison', 'role': 'debate'}
+  {'name': 'allison', 'role': 'debate'},
+  {'name': 'pia', 'role': 'debate or judge'},
+  {'name': 'lindsey', 'role': 'debate or judge'},
+  {'name': 'charlie', 'role': 'debate or judge'}
 ]
 
 rooms = ['BUCH B211', 'BUCH B219']
@@ -30,6 +33,8 @@ rooms = ['BUCH B211', 'BUCH B219']
 judges = []
 
 debaters = []
+
+debate_or_judge = []
 
 sortedRooms = {
   0: {
@@ -50,6 +55,14 @@ sortedRooms = {
   },
   2: {
     "RoomName": "BUCH B215",
+    "Judge(s)": [],
+    "OG": [],
+    "OO": [],
+    "CG": [],
+    "CO": []
+  },
+  3: {
+    "RoomName": "BUCH B216",
     "Judge(s)": [],
     "OG": [],
     "OO": [],
