@@ -141,6 +141,14 @@ def assign_debater_room(debaters):
   if extraDebaters:
     handle_extra_debaters(roomCounter, extraDebaters)
 
+def rooms_used(sortedRooms):
+  roomsUsed = 0
+  for room in sortedRooms:
+    if sortedRooms[room]["OG"] != []:
+      roomsUsed += 1
+    else:
+      return roomsUsed
+
 def debaters_count(participants):
   for participant in participants:
     if participant['role'] == 'debate':
