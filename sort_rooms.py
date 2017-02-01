@@ -158,10 +158,16 @@ def judges_count(participants):
   for participant in participants:
       if participant['role'] == 'judge':
         judges.append(participant['name'])
+def debate_or_judge_count(participants):
+  for participant in participants:
+    if participant['role'] == 'debate or judge':
+      debate_or_judge.append(participant['name'])
 
 judges_count(participants)
 
 debaters_count(participants)
+
+debate_or_judge_count(participants)
 
 assign_debater_room(debaters)
 
