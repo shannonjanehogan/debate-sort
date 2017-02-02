@@ -108,19 +108,26 @@ def enough_judges(sortedRooms):
   return len(judges) >= rooms_used(sortedRooms)
 
 def judges_needed():
-  return len(list(sortedRooms.keys())) - len(judges)
+  if enough_judges(sortedRooms):
+    return 0
+  else:
+    return rooms_used(sortedRooms) - len(judges)
 
 def handle_extra_debaters(roomCounter, extraDebaters):
   i = 0
   positions = ["OG", "OO"]
+  if debate_or_judge:
+    extraDebaters.extend(debate_or_judge)
+  ## if there are enough debaters for a half room && we don't need judges
   if len(extraDebaters) - judges_needed() >= 5:
     for debater in extraDebaters:
-      if enough_judges:
-        sortedRooms[roomCounter][positions[i]].append(debater)
+      if i == len(positions):
+        sortedRooms[roomCounter]["Judge(s)"].append(debater)
+      else:
+        if len(sortedRooms[roomCounter][positions[i]]) < 2:
+          sortedRooms[roomCounter][positions[i]].append(debater)
         if len(sortedRooms[roomCounter][positions[i]]) == 2:
           i += 1
-        if i == len(positions):
-          judges.append(debater)
   else:
     judges.extend(extraDebaters)
 
@@ -156,8 +163,9 @@ def debaters_count(participants):
 
 def judges_count(participants):
   for participant in participants:
-      if participant['role'] == 'judge':
-        judges.append(participant['name'])
+    if participant['role'] == 'judge':
+      judges.append(participant['name'])
+
 def debate_or_judge_count(participants):
   for participant in participants:
     if participant['role'] == 'debate or judge':
