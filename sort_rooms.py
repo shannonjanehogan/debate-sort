@@ -78,21 +78,15 @@ sortedRooms = {
 #more judges than rooms
 #equal judges to rooms
 #more debaters than spots (go through list, then add extra debaters to judges list)
+#handle debate or judge
 #less judges than rooms (later)
 #odd number of debaters than rooms (later)
 
 #Todo
-#handle debate or judge
 #handle partner preference
 #import data from csv
 #export data to csv
 #need to think through how to do sorted rooms
-
-#stretch
-#store the data
-#match based on skill (aka do a nov room, pro room, or mixed rooms)
-#make simple web page and do forms yourself
-#text debaters their room & partner & other debaters
 
 def assign_judge_room(judges):
   if len(judges) >= len(rooms):
