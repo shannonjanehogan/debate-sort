@@ -46,5 +46,4 @@ Currently, this application handles British Parliamentary Debate Style.
 ### Contributors:
 
 [Shannon Hogan](https://github.com/shannonjanehogan)
-[Grant Bradshaw](https://github.com/grantbradshaw)
 [Christina Hess](https://github.com/mariaxtina)
