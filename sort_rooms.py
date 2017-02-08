@@ -144,7 +144,7 @@ def assign_debater_room():
 def rooms_used():
   roomsUsed = 0
   for room in sortedRooms:
-    if sortedRooms[room]["OG"] != []:
+    if sortedRooms[room]["CG"]:
       roomsUsed += 1
     else:
       return roomsUsed
