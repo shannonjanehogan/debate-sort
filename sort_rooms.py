@@ -172,6 +172,4 @@ debate_or_judge_count()
 
 assign_debater_room()
 
-assign_judge_room()
-
 pp.pprint(sortedRooms)
