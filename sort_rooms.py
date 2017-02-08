@@ -110,17 +110,19 @@ def handle_extra_debaters(extraDebaters, roomCounter):
   positions = ["OG", "OO"]
   if debate_or_judge:
     extraDebaters.extend(debate_or_judge)
-  for debater in extraDebaters:
-    if ((len(extraDebaters) - judges_needed() >= 5) & (enough_judges())):
+  if (len(extraDebaters) - judges_needed() >= 5):
+    extraRoom = extraDebaters[:5]
+    assign_judge_room(extraDebaters[5:])
+    for debater in extraRoom:
       if i == len(positions):
         sortedRooms[roomCounter]["Judge(s)"].append(debater)
       else:
         if len(sortedRooms[roomCounter][positions[i]]) < 2:
           sortedRooms[roomCounter][positions[i]].append(debater)
-        if len(sortedRooms[roomCounter][positions[i]]) == 2:
-          i += 1
-    else:
-      judges.extend(extraDebaters)
+          if len(sortedRooms[roomCounter][positions[i]]) == 2:
+            i += 1
+  else:
+    assign_judge_room(extraDebaters)
 
 def assign_debater_room():
   roomCounter = 0
