@@ -86,15 +86,15 @@ sortedRooms = {
 #export data to csv
 #need to think through how to do sorted rooms
 
-def assign_judge_room():
-  if len(judges) >= rooms_used():
-    counter = 0;
-    for judge in judges:
-      sortedRooms[counter]["Judge(s)"].append(judge)
-      if counter < len(sortedRooms) - 1:
-        counter += 1
-      else:
-        counter = 0
+def assign_judge_room(extraDebaters):
+  judges.extend(extraDebaters)
+  counter = 0;
+  for judge in judges:
+    sortedRooms[counter]["Judge(s)"].append(judge)
+    if counter < (rooms_used() - 1):
+      counter += 1
+    else:
+      counter = 0
 
 def enough_judges():
   return len(judges) >= rooms_used()
