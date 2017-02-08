@@ -28,8 +28,6 @@ participants = [
   {'name': 'charlie', 'role': 'debate or judge'}
 ]
 
-rooms = ['BUCH B211', 'BUCH B219']
-
 judges = []
 
 debaters = []
@@ -88,33 +86,32 @@ sortedRooms = {
 #export data to csv
 #need to think through how to do sorted rooms
 
-def assign_judge_room(judges):
-  if len(judges) >= len(rooms):
+def assign_judge_room():
+  if len(judges) >= rooms_used():
     counter = 0;
     for judge in judges:
       sortedRooms[counter]["Judge(s)"].append(judge)
-      if counter < len(rooms) - 1:
+      if counter < len(sortedRooms) - 1:
         counter += 1
       else:
         counter = 0
 
-def enough_judges(sortedRooms):
-  return len(judges) >= rooms_used(sortedRooms)
+def enough_judges():
+  return len(judges) >= rooms_used()
 
 def judges_needed():
-  if enough_judges(sortedRooms):
+  if enough_judges():
     return 0
   else:
-    return rooms_used(sortedRooms) - len(judges)
+    return rooms_used() - len(judges)
 
-def handle_extra_debaters(roomCounter, extraDebaters):
+def handle_extra_debaters(extraDebaters, roomCounter):
   i = 0
   positions = ["OG", "OO"]
   if debate_or_judge:
     extraDebaters.extend(debate_or_judge)
-  ## if there are enough debaters for a half room && we don't need judges
-  if len(extraDebaters) - judges_needed() >= 5:
-    for debater in extraDebaters:
+  for debater in extraDebaters:
+    if ((len(extraDebaters) - judges_needed() >= 5) & (enough_judges())):
       if i == len(positions):
         sortedRooms[roomCounter]["Judge(s)"].append(debater)
       else:
@@ -122,10 +119,10 @@ def handle_extra_debaters(roomCounter, extraDebaters):
           sortedRooms[roomCounter][positions[i]].append(debater)
         if len(sortedRooms[roomCounter][positions[i]]) == 2:
           i += 1
-  else:
-    judges.extend(extraDebaters)
+    else:
+      judges.extend(extraDebaters)
 
-def assign_debater_room(debaters):
+def assign_debater_room():
   roomCounter = 0
   i = 0
   positions = ["OG", "OO", "CG", "CO"]
@@ -140,9 +137,9 @@ def assign_debater_room(debaters):
       i = 0
       roomCounter += 1
   if extraDebaters:
-    handle_extra_debaters(roomCounter, extraDebaters)
+    handle_extra_debaters(extraDebaters, roomCounter)
 
-def rooms_used(sortedRooms):
+def rooms_used():
   roomsUsed = 0
   for room in sortedRooms:
     if sortedRooms[room]["OG"] != []:
@@ -150,29 +147,29 @@ def rooms_used(sortedRooms):
     else:
       return roomsUsed
 
-def debaters_count(participants):
+def debaters_count():
   for participant in participants:
     if participant['role'] == 'debate':
       debaters.append(participant['name'])
 
-def judges_count(participants):
+def judges_count():
   for participant in participants:
     if participant['role'] == 'judge':
       judges.append(participant['name'])
 
-def debate_or_judge_count(participants):
+def debate_or_judge_count():
   for participant in participants:
     if participant['role'] == 'debate or judge':
       debate_or_judge.append(participant['name'])
 
-judges_count(participants)
+judges_count()
 
-debaters_count(participants)
+debaters_count()
 
-debate_or_judge_count(participants)
+debate_or_judge_count()
 
-assign_debater_room(debaters)
+assign_debater_room()
 
-assign_judge_room(judges)
+assign_judge_room()
 
 pp.pprint(sortedRooms)
