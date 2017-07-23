@@ -1,5 +1,17 @@
-import Status
-import DebaterSkill
+from enum import Enum
+
+
+class DebaterSkill(Enum):
+    NOV = 'NOV'
+    PRO = 'PRO'
+    ADVANCED = 'ADVANCED'
+
+
+class Status(Enum):
+    DEBATER = 'DEBATER'
+    JUDGE = 'JUDGE'
+    JUDGE_OR_DEBATE = 'JUDGE_OR_DEBATE'
+    SPECTATOR = 'SPECTATOR'
 
 
 class Debater:
@@ -19,3 +31,5 @@ class Debater:
 
     def __hash__(self):
         return hash(self.name)
+
+
