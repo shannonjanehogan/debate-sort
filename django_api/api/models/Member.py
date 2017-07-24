@@ -5,6 +5,7 @@ from django import forms
 from rest_framework.authtoken.models import Token
 from django.dispatch import receiver
 
+
 class Member(models.Model):
     user = models.OneToOneField(
         User,
@@ -15,6 +16,7 @@ class Member(models.Model):
         ('PRO', 'PRO'),
         ('ADVANCED', 'ADVANCED'),
     )
+
 
 # This receiver handles token creation immediately a new user is created.
 @receiver(post_save, sender=User)

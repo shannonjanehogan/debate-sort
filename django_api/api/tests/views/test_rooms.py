@@ -1,9 +1,10 @@
 from django.test import TestCase
-from api.models.Room import Room
+from django_api.api.models.Room import Room
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+
 
 class ViewTestCase(TestCase):
     """Test suite for the api views."""

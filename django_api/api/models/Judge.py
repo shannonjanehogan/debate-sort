@@ -2,6 +2,8 @@ from django.db import models
 from .Member import Member
 from .SortedRoom import SortedRoom
 
+
+# Says that Member and SortedRoom import statements are not used
 class Judge(models.Model):
     member_id = models.ForeignKey('Member')
     sorted_room_id = models.ForeignKey('SortedRoom')

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class VPIPreference(models.Model):
     judgeless_rooms = models.BooleanField(default=False)
     room_type = (

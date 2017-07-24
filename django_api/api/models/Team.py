@@ -1,6 +1,7 @@
 from django.db import models
 from .Member import Member
 
+
 class Team(models.Model):
     debater_one_id = models.ForeignKey('Member')
     debater_two_id = models.ForeignKey('Member')

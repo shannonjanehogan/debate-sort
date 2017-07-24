@@ -2,6 +2,7 @@ from django.db import models
 from .Team import Team
 from .Room import Room
 
+
 class SortedRoom(models.Model):
     og_id = models.ForeignKey('Team')
     oo_id = models.ForeignKey('Team')

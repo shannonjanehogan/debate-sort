@@ -1,13 +1,15 @@
 from rest_framework import generics, permissions
-from .serializers import RoomSerializer, TeamSerializer, JudgeSerializer, SortedRoomSerializer, VPIPreferenceSerializer, SignUpPreferenceSerializer, MemberSerializer
-from api.models.Room import Room
-from api.models.Team import Team
-from api.models.Judge import Judge
-from api.models.SortedRoom import SortedRoom
-from api.models.VPIPreference import VPIPreference
-from api.models.SignUpPreference import SignUpPreference
-from api.models.Member import Member
+from .serializers import RoomSerializer, TeamSerializer, JudgeSerializer, SortedRoomSerializer, \
+    VPIPreferenceSerializer, SignUpPreferenceSerializer, MemberSerializer
+from .models.Room import Room
+from .models.Team import Team
+from .models.Judge import Judge
+from .models.SortedRoom import SortedRoom
+from .models.VPIPreference import VPIPreference
+from .models.SignUpPreference import SignUpPreference
+from .models.Member import Member
 from .permissions import IsOwner
+
 
 class RoomCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -18,11 +20,13 @@ class RoomCreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new room."""
         serializer.save()
 
+
 class RoomDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+
 
 class TeamCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -33,11 +37,13 @@ class TeamCreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new room."""
         serializer.save()
 
+
 class TeamDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+
 
 class JudgeCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -48,11 +54,13 @@ class JudgeCreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new room."""
         serializer.save()
 
+
 class JudgeDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = Judge.objects.all()
     serializer_class = JudgeSerializer
+
 
 class SortedRoomCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -63,11 +71,13 @@ class SortedRoomCreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new room."""
         serializer.save()
 
+
 class SortedRoomDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = SortedRoom.objects.all()
     serializer_class = SortedRoomSerializer
+
 
 class VPIPreferenceCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -78,11 +88,13 @@ class VPIPreferenceCreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new room."""
         serializer.save()
 
+
 class VPIPreferenceDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = VPIPreference.objects.all()
     serializer_class = VPIPreferenceSerializer
+
 
 class SignUpPreferenceCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -93,11 +105,13 @@ class SignUpPreferenceCreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new room."""
         serializer.save()
 
+
 class SignUpPreferenceDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = SignUpPreference.objects.all()
     serializer_class = SignUpPreferenceSerializer
+
 
 class MemberCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -107,6 +121,7 @@ class MemberCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """Save the post data when creating a new room."""
         serializer.save()
+
 
 class MemberDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""

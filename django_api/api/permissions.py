@@ -1,5 +1,6 @@
 from rest_framework.permissions import BasePermission
-from api.models.Member import Member
+from .models.Member import Member
+
 
 class IsOwner(BasePermission):
     """Custom permission class to allow only user owners to edit them."""

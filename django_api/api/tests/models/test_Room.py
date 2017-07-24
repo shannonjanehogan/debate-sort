@@ -1,5 +1,6 @@
 from django.test import TestCase
-from api.models.Room import Room
+from django_api.api.models.Room import Room
+
 
 class ModelTestCase(TestCase):
     """This class defines the test suite for the room model."""
