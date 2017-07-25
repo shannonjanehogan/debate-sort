@@ -21,7 +21,7 @@ class RoomSerializer(serializers.ModelSerializer):
 class JudgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Judge
-        fields = ('id', 'member_id', 'sorted_room_id' 'date_created', 'date_modified')
+        fields = ('id', 'member_id', 'sorted_room_id', 'date_created', 'date_modified')
         read_only_fields = ('date_created', 'date_modified')
 
 
@@ -57,5 +57,5 @@ class VPIPreferenceSerializer(serializers.ModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'skill_level', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ('id', 'skill_level')
+        # read_only_fields = ('date_created', 'date_modified')
