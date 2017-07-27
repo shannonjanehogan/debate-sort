@@ -6,6 +6,8 @@ from .models.SortedRoom import SortedRoom
 from .models.VPIPreference import VPIPreference
 from .models.Member import Member
 from .models.SignUpPreference import SignUpPreference
+from .models.DebaterPreference import DebaterPreference
+from .models.SkillLevel import SkillLevel
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -14,48 +16,58 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         """Map this serializer to a model and their fields."""
         model = Room
-        fields = ('id', 'name', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'name', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
 class JudgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Judge
-        fields = ('id', 'member_id', 'sorted_room_id', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'member_id', 'sorted_room_id', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ('id', 'debater_one_id', 'debater_two_id', 'skill_level', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'debater_one_id', 'debater_two_id', 'skill_level', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
 class SortedRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = SortedRoom
-        fields = ('id', 'og_id', 'oo_id', 'cg_id', 'co_id', 'room_id', 'skill_level', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'og_id', 'oo_id', 'cg_id', 'co_id', 'room_id', 'skill_level', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
 class SignUpPreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = SignUpPreference
-        fields = ('id', 'member_id', 'name', 'partner_preference', 'debate_preference', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'member_id', 'name', 'partner_preference', 'debate_preference', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
 class VPIPreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = VPIPreference
-        fields = ('id', 'judgeless_rooms', 'room_type', 'date_created', 'date_modified')
-        read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'judgeless_rooms', 'room_type', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
-# TODO double check if fields from Django user default model should be listed
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ('id', 'skill_level')
-        # read_only_fields = ('date_created', 'date_modified')
+        fields = ['id', 'skill_level']
+
+
+class DebaterPreferenceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DebaterPreference
+        fields = ['debater_preference']
+
+
+class SkillLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SkillLevel
+        fields = ['skill_level']

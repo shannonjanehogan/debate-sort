@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from .serializers import RoomSerializer, TeamSerializer, JudgeSerializer, SortedRoomSerializer, \
-    VPIPreferenceSerializer, SignUpPreferenceSerializer, MemberSerializer
+    VPIPreferenceSerializer, SignUpPreferenceSerializer, MemberSerializer, DebaterPreferenceSerializer, \
+    SkillLevelSerializer
 from .models.Room import Room
 from .models.Team import Team
 from .models.Judge import Judge
@@ -8,6 +9,8 @@ from .models.SortedRoom import SortedRoom
 from .models.VPIPreference import VPIPreference
 from .models.SignUpPreference import SignUpPreference
 from .models.Member import Member
+from .models.DebaterPreference import DebaterPreference
+from .models.SkillLevel import SkillLevel
 from .permissions import IsOwner
 
 
@@ -128,3 +131,37 @@ class MemberDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
+
+
+class DebaterPreferenceCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = DebaterPreference.objects.all()
+    serializer_class = DebaterPreferenceSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new room."""
+        serializer.save()
+
+
+class DebaterPreferenceDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    queryset = DebaterPreference.objects.all()
+    serializer_class = DebaterPreferenceSerializer
+
+
+class SkillLevelCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = SkillLevel.objects.all()
+    serializer_class = SkillLevelSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new room."""
+        serializer.save()
+
+
+class SkillLevelDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    queryset = SkillLevel.objects.all()
+    serializer_class = SkillLevelSerializer
