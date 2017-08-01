@@ -64,10 +64,12 @@ class MemberSerializer(serializers.ModelSerializer):
 class DebaterPreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = DebaterPreference
-        fields = ['debater_preference']
+        fields = ['id', 'debater_preference', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
 
 
 class SkillLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = SkillLevel
-        fields = ['skill_level']
+        fields = ['id', 'skill_level', 'date_created', 'date_modified']
+        read_only_fields = ['date_created', 'date_modified']
