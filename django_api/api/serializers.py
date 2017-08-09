@@ -44,7 +44,7 @@ class SortedRoomSerializer(serializers.ModelSerializer):
 class SignUpPreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = SignUpPreference
-        fields = ['id', 'member_id', 'name', 'partner_preference', 'debate_preference', 'date_created', 'date_modified']
+        fields = ['id', 'member_id', 'partner_preference', 'debate_preference', 'date_created', 'date_modified']
         read_only_fields = ['date_created', 'date_modified']
 
 

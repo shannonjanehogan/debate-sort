@@ -13,3 +13,6 @@ class SortedRoom(models.Model):
     skill_level = models.ForeignKey(SkillLevel)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.room_id.name + ': ' + self.skill_level.name + ', ' + self.date_created.strftime('%x')
