@@ -1,6 +1,8 @@
 import random
+from typing import Set
 
 from room_sorter_script.Teams import TeamSkill, Team
+from room_sorter_script.Debaters import Debater
 
 
 def remove_team(teams_pro, teams_nov, teams_proam, teams_adv):

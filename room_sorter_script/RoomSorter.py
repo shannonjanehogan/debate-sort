@@ -4,9 +4,9 @@ from typing import Set
 
 from room_sorter_script.RoomSorterHelpers import remove_team, add_team, create_team, create_team_random, handle_proam, \
     make_rooms_full, make_rooms_half
-from .Debaters import DebaterSkill, Status, Debater
-from .Rooms import Room
-from .Teams import TeamSkill, Team
+from room_sorter_script.Debaters import DebaterSkill, Status, Debater
+from room_sorter_script.Rooms import Room
+from room_sorter_script.Teams import TeamSkill, Team
 
 
 class RoomSorter:
