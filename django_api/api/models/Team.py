@@ -9,3 +9,7 @@ class Team(models.Model):
     skill_level = models.ForeignKey(SkillLevel)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.debater_one_id.user.username + '/' + self.debater_two_id.user.username + ', ' + \
+               self.date_created.strftime('%x')
