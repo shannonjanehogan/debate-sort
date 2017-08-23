@@ -17,7 +17,20 @@ from .permissions import IsStaffOrTargetUser
 from .serializers import RoomSerializer, TeamSerializer, JudgeSerializer, SortedRoomSerializer, \
     VPIPreferenceSerializer, SignUpPreferenceSerializer, MemberSerializer, DebaterPreferenceSerializer, \
     SkillLevelSerializer, UserSerializer
+from .room_sorter_script.data_parser import startRoomSorterScript
 
+class RoomSorterScriptCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = SortedRoom.objects.all()
+    serializer_class = SortedRoomSerializer
+    authentication_classes = (TokenAuthentication, BasicAuthentication)
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new room."""
+        rooms = Room.objects.all()
+        sign_up_preferences_debaters = SignUpPreference.objects.filter(date_created=datetime.today()).select_related('member')
+        VPIPreference = VPIPreference.objects.filter(pub_date__date=datetime.today())
+        startRoomSorterScript(rooms, debaters, VPIPreference)
 
 class RoomCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -71,7 +84,6 @@ class JudgeDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Judge.objects.all()
     serializer_class = JudgeSerializer
     authentication_classes = (TokenAuthentication, BasicAuthentication)
-
 
 class SortedRoomCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""

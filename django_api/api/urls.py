@@ -6,14 +6,15 @@ from django.views.decorators.csrf import csrf_exempt
 from .views import RoomCreateView, RoomDetailsView, JudgeCreateView, JudgeDetailsView, TeamCreateView, TeamDetailsView,\
     SortedRoomCreateView, SortedRoomDetailsView, MemberCreateView, MemberDetailsView, SignUpPreferenceCreateView, \
     SignUpPreferenceDetailsView, VPIPreferenceCreateView, VPIPreferenceDetailsView, DebaterPreferenceCreateView, \
-    DebaterPreferenceDetailsView, SkillLevelCreateView, SkillLevelDetailsView, UserView
+    DebaterPreferenceDetailsView, SkillLevelCreateView, SkillLevelDetailsView, UserView, RoomSorterScriptCreateView
 
 router = routers.DefaultRouter()
-router.register(r'accounts/', UserView, 'list')
+router.register(r'accounts/', UserView, 'list') #TODO why is this raising a regex error?
 
 urlpatterns = {
     url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^api', include(router.urls)),
+    url(r'^room_sorter_script/$', RoomSorterScriptCreateView.as_view(), name="create"),
     url(r'^rooms/$', RoomCreateView.as_view(), name="create"),
     url(r'^rooms/(?P<pk>[0-9]+)/$', RoomDetailsView.as_view(), name="details"),
     url(r'^judges/$', JudgeCreateView.as_view(), name="create"),
