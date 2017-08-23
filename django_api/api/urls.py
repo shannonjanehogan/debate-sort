@@ -13,7 +13,7 @@ router.register(r'accounts/', UserView, 'list')
 
 urlpatterns = {
     url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api', include(router.urls)),
+    # url(r'^api', include(router.urls)),
     url(r'^rooms/$', RoomCreateView.as_view(), name="create"),
     url(r'^rooms/(?P<pk>[0-9]+)/$', RoomDetailsView.as_view(), name="details"),
     url(r'^judges/$', JudgeCreateView.as_view(), name="create"),
